@@ -68,8 +68,8 @@ namespace FracMaster
       // 
       this.splitContainer1.Panel2.Controls.Add(this.button2);
       this.splitContainer1.Panel2.Controls.Add(this.button1);
-      this.splitContainer1.Size = new System.Drawing.Size(487, 377);
-      this.splitContainer1.SplitterDistance = 345;
+      this.splitContainer1.Size = new System.Drawing.Size(700, 600);
+      this.splitContainer1.SplitterDistance = 558;
       this.splitContainer1.TabIndex = 0;
       this.splitContainer1.TabStop = false;
       // 
@@ -113,25 +113,27 @@ namespace FracMaster
       this.panel1.Location = new System.Drawing.Point(30, 54);
       this.panel1.Margin = new System.Windows.Forms.Padding(0);
       this.panel1.Name = "panel1";
-      this.panel1.Size = new System.Drawing.Size(275, 308);
+      this.panel1.Size = new System.Drawing.Size(450, 450);
       this.panel1.TabIndex = 0;
       // 
       // button2
       // 
-      this.button2.Location = new System.Drawing.Point(28, 54);
+      this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.button2.Location = new System.Drawing.Point(28, 61);
       this.button2.Name = "button2";
-      this.button2.Size = new System.Drawing.Size(81, 24);
+      this.button2.Size = new System.Drawing.Size(81, 30);
       this.button2.TabIndex = 1;
-      this.button2.Text = "Cancel";
+      this.button2.Text = "Poistu";
       this.button2.UseVisualStyleBackColor = true;
       this.button2.Click += new System.EventHandler(this.button2_Click);
       // 
       // button1
       // 
       this.button1.FlatAppearance.BorderSize = 0;
+      this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.button1.Location = new System.Drawing.Point(28, 24);
       this.button1.Name = "button1";
-      this.button1.Size = new System.Drawing.Size(81, 24);
+      this.button1.Size = new System.Drawing.Size(81, 31);
       this.button1.TabIndex = 0;
       this.button1.Text = "Ok";
       this.button1.UseVisualStyleBackColor = true;
@@ -173,10 +175,16 @@ namespace FracMaster
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(487, 377);
+      this.ClientSize = new System.Drawing.Size(700, 600);
+      this.ControlBox = false;
       this.Controls.Add(this.splitContainer1);
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+      this.MaximizeBox = false;
+      this.MinimizeBox = false;
       this.Name = "EditPaletteDialog";
-      this.Text = "EditPaletteDialog";
+      this.ShowIcon = false;
+      this.ShowInTaskbar = false;
+      this.Text = "Värit";
       this.splitContainer1.Panel1.ResumeLayout(false);
       this.splitContainer1.Panel1.PerformLayout();
       this.splitContainer1.Panel2.ResumeLayout(false);

@@ -415,7 +415,11 @@ namespace FracMaster
         numericSizeX.Value = Convert.ToDecimal(frac.Parameters.GetValue("WIDTH"));
         numericSizeY.Value = Convert.ToDecimal(frac.Parameters.GetValue("HEIGHT"));
         numericIteration.Value = Convert.ToDecimal(frac.Parameters.GetValue("ITERATIONS"));
-        checkBoxInterpolation.Checked = (int)frac.Parameters.GetValue("RENDER_INTERPOLATED", 0) == 1 ? true : false;
+        if(frac.Parameters.HasValue("RENDER_INTERPOLATED"))
+           checkBoxInterpolation.Checked = (int)frac.Parameters.GetValue("RENDER_INTERPOLATED", 0) == 1 ? true : false;
+        else
+          checkBoxInterpolation.Enabled = false;
+       
         checkBoxFilter.Checked = (int)frac.Parameters.GetValue("APPLY_BILINEAR_FILTER", 0) == 1 ? true : false;
         checkBoxPreview.Checked = (int)frac.Parameters.GetValue("AUTOMATIC_PREVIEW", 0) == 1 ? true : false;
       }

@@ -61,35 +61,35 @@ namespace FracMaster
             this.juliaFractalToolStripMenuItem,
             this.newtonFractalToolStripMenuItem});
       this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-      this.newToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
-      this.newToolStripMenuItem.Text = "New";
+      this.newToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
+      this.newToolStripMenuItem.Text = "Uusi";
       // 
       // mandelbrotFractalToolStripMenuItem
       // 
       this.mandelbrotFractalToolStripMenuItem.Name = "mandelbrotFractalToolStripMenuItem";
-      this.mandelbrotFractalToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
-      this.mandelbrotFractalToolStripMenuItem.Text = "Mandelbrot Fractal";
+      this.mandelbrotFractalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.mandelbrotFractalToolStripMenuItem.Text = "Mandelbrot";
       this.mandelbrotFractalToolStripMenuItem.Click += new System.EventHandler(this.mandelbrotFractalToolStripMenuItem_Click);
       // 
       // juliaFractalToolStripMenuItem
       // 
       this.juliaFractalToolStripMenuItem.Name = "juliaFractalToolStripMenuItem";
-      this.juliaFractalToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
-      this.juliaFractalToolStripMenuItem.Text = "Julia Fractal";
+      this.juliaFractalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.juliaFractalToolStripMenuItem.Text = "Julia";
       this.juliaFractalToolStripMenuItem.Click += new System.EventHandler(this.juliaFractalToolStripMenuItem_Click);
       // 
       // newtonFractalToolStripMenuItem
       // 
       this.newtonFractalToolStripMenuItem.Name = "newtonFractalToolStripMenuItem";
-      this.newtonFractalToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
-      this.newtonFractalToolStripMenuItem.Text = "Newton Fractal - Iterations Required";
+      this.newtonFractalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.newtonFractalToolStripMenuItem.Text = "Newton";
       this.newtonFractalToolStripMenuItem.Click += new System.EventHandler(this.newtonFractalToolStripMenuItem_Click);
       // 
       // loadToolStripMenuItem
       // 
       this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
       this.loadToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
-      this.loadToolStripMenuItem.Text = "Load";
+      this.loadToolStripMenuItem.Text = "Avaa";
       this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadFractalToolStripMenuItem_Click);
       // 
       // aboutToolStripMenuItem

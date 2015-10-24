@@ -20,6 +20,7 @@ namespace FracMaster
       pars.AddValue("NUM_THREADS", Environment.ProcessorCount);
       pars.AddValue("APPLY_BILINEAR_FILTER", 0);
       pars.AddValue("COLOR_COUNT", 5);
+      pars.SetValue("AUTOMATIC_PREVIEW", 1);
     }
 
     virtual public void SetOrigin(int x, int y)

@@ -9,7 +9,7 @@ namespace FracMaster
   {
     int[] palette = null;
     public int ColorCount { get; set;  }
-    int palettewidth = 256;
+    int palettewidth = 400;
     int gradientIndexStart = -1;
     int gradientIndexEnd = -1;
 
@@ -43,9 +43,9 @@ namespace FracMaster
         numericColorCount.Value = ColorCount;
         if (palette != null)
         {
-
+          var colorWidth = 30;
           int NumColsX = (int)(Math.Sqrt(palette.Length) + 0.5);
-          palettewidth = (NumColsX - 1) * 17;
+          palettewidth = (NumColsX - 1) * colorWidth;
 
           SuspendLayout();
 
@@ -60,18 +60,18 @@ namespace FracMaster
           for (int i = 0; i < palette.Length; i++)
           {
             Button b = new Button();
-            b.Width = 16;
-            b.Height = 16;
+            b.Width = colorWidth - 2;
+            b.Height = colorWidth - 2;
             b.Location = new Point(x + 1, y + 1);
             b.BackColor = Color.FromArgb(palette[i]);
             b.FlatStyle = FlatStyle.Flat;
             b.FlatAppearance.BorderSize = 0;
             b.TabIndex = i;
-            x += 17;
+            x += colorWidth;
             if (idx++ >= NumColsX - 1)
             {
               x = 0;
-              y += 17;
+              y += colorWidth;
               idx = 0;
             }
             panel1.Controls.Add(b);
@@ -123,8 +123,8 @@ namespace FracMaster
       else
       {
 
-        panel1.Width = palettewidth + 20;
-        panel1.Height = palettewidth + 20;
+        panel1.Width = palettewidth + 30;
+        panel1.Height = palettewidth + 30;
 
         Point loc = panel1.Location;
 
