@@ -9,13 +9,7 @@ namespace FracMaster
     public NewtonFractalByIterationsRequired()
     {
       pars.SetValue("NAME", "Newton Fractal by iterations required");
-      pars.SetValue("X", 0);
-      pars.SetValue("Y", 0);
-      pars.SetValue("W", 8.0);
-      pars.SetValue("H", 8.0);
       pars.SetValue("A", 1.0);
-      pars.SetValue("WIDTH", 800);
-      pars.SetValue("HEIGHT", 800);
       pars.SetValue("VERSION", "1.0.0");
       pars.SetValue("ITERATIONS", 32);
       pars.SetValue("AUTOMATIC_PREVIEW", 1);
@@ -47,15 +41,15 @@ namespace FracMaster
       double a = (double)pars.GetValue("A");
       double W = (double)pars.GetValue("W");
       double H = (double)pars.GetValue("H");
-      double X = (int)pars.GetValue("X");
-      double Y = (int)pars.GetValue("Y");
+      double X = (double)pars.GetValue("X");
+      double Y = (double)pars.GetValue("Y");
 
       int iter = 0;
       int idx = 0;
-      double xs = (-X / width - 0.5) * W;
-      double ys = (Y / heigth - 0.5) * H;
-      double xd = W / width;
-      double yd = H / heigth;
+      double xs = (W * X / width - 0.5) / (W * 0.25);
+      double ys = (H * -Y / heigth - 0.5) / (H * 0.25);
+      double xd = 4.0 / width / W;
+      double yd = 4.0 / heigth / H;
       double y1 = ys + yd * offset;
 
 

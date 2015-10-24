@@ -20,8 +20,8 @@ namespace FracMaster
       // name of the fractal
       pars.AddValue("NAME", "GenericFractal");
       // output width and height
-      pars.AddValue("WIDTH", 800);
-      pars.AddValue("HEIGHT", 600);
+      pars.AddValue("WIDTH", 600);
+      pars.AddValue("HEIGHT", 800);
       // version of the fractal render engine 
       pars.AddValue("VERSION", "1.0.0");
 

@@ -50,6 +50,7 @@ namespace FracMaster
     {
       FractalForm frmchild = createFractalForm("Mandelbrot Fractal");
       frmchild.Fractal = new MandelbrotFractal();
+      frmchild.UpdateFractalSize();
       frmchild.ParametersToDialog();
     }
 
@@ -57,6 +58,7 @@ namespace FracMaster
     {
       FractalForm frmchild = createFractalForm("Julia Fractal");
       frmchild.Fractal = new JuliaFractal();
+      frmchild.UpdateFractalSize();
       frmchild.ParametersToDialog();
     }
 
@@ -64,6 +66,7 @@ namespace FracMaster
     {
       FractalForm frmchild = createFractalForm("Newton Fractal - Iterations Required");
       frmchild.Fractal = new NewtonFractalByIterationsRequired();
+      frmchild.UpdateFractalSize();
       frmchild.ParametersToDialog();
     }
 

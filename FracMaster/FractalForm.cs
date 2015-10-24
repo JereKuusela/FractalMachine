@@ -38,10 +38,19 @@ namespace FracMaster
     public FractalForm()
     {
       InitializeComponent();
-      pictureBox1.MouseMove += new MouseEventHandler(pictureBox2_MouseMove);
-      pictureBox1.MouseDown += new MouseEventHandler(pictureBox2_MouseDown);
-      pictureBox1.MouseUp += new MouseEventHandler(pictureBox2_MouseUp);
+      pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
+      pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
+      pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
+      pictureBox1.MouseWheel += new MouseEventHandler(pictureBox1_MouseWheel);
       splitContainer1.Panel2.SizeChanged += new System.EventHandler(splitContainer1_Panel2_SizeChanged);
+    }
+
+    public void UpdateFractalSize()
+    {
+      if (frac != null)
+        Fractal.Parameters.SetValue("WIDTH", pictureBox1.Width);
+      if (frac != null)
+        Fractal.Parameters.SetValue("HEIGHT", pictureBox1.Height);
     }
 
     protected override void OnClosing(CancelEventArgs e)
@@ -104,9 +113,9 @@ namespace FracMaster
       RenderFractal(false);
     }
 
-    void OnControlPointDragged(int dx, int dy)
+    void OnControlPointDragged(Point dragEnd)
     {
-      ((Generic2DFractal)frac).SetControlParameter(dx, dy);
+      ((Generic2DFractal)frac).SetControlParameter(dragEnd.X, dragEnd.Y);
       ParametersToDialog();
       RenderFractal(false);
 
@@ -153,25 +162,21 @@ namespace FracMaster
 
     void OnImageZoomed(Point p1, Point p2)
     {
-      ((Generic2DFractal)frac).SetOriginDelta((p1.X + p2.X) / 2, (p1.Y + p2.Y) / 2);
+      ((Generic2DFractal)frac).SetOrigin((p1.X + p2.X) / 2, (p1.Y + p2.Y) / 2);
       ((Generic2DFractal)frac).SetScale((p2.X - p1.X), (p2.Y - p1.Y));
       ParametersToDialog();
       RenderFractal(false);
     }
 
-    void pictureBox2_MouseUp(object sender, MouseEventArgs e)
+    void pictureBox1_MouseUp(object sender, MouseEventArgs e)
     {
       if (IsMouseOverImage(e.X, e.Y) && e.Button == MouseButtons.Left)
       {
         OnImageOriginDragged(new Point(e.X, e.Y));
       }
-      else if (IsMouseOverImage(e.X, e.Y) &&
-               dragStart != Point.Empty &&
-               e.Button == MouseButtons.Middle)
+      else if (IsMouseOverImage(e.X, e.Y) && e.Button == MouseButtons.Middle)
       {
-        // begin drag
-        dragEnd = new Point(e.X, e.Y);
-        OnControlPointDragged(dragEnd.X - dragStart.X, dragEnd.Y - dragStart.Y);
+        OnControlPointDragged(new Point(e.X, e.Y));
       }
       else if (IsMouseOverImage(e.X, e.Y) && dragStart != Point.Empty && e.Button == MouseButtons.Right)
       {
@@ -199,19 +204,9 @@ namespace FracMaster
       Cursor = Cursors.Default;
     }
 
-    void pictureBox2_MouseDown(object sender, MouseEventArgs e)
+    void pictureBox1_MouseDown(object sender, MouseEventArgs e)
     {
       if (IsMouseOverImage(e.X, e.Y) &&
-      dragStart == Point.Empty &&
-      e.Button == MouseButtons.Middle &&
-      !isRendering)
-      {
-        // begin drag
-        dragStart = new Point(e.X, e.Y);
-        Cursor = Cursors.Cross;
-        isDragging = true;
-      }
-      else if (IsMouseOverImage(e.X, e.Y) &&
                dragStart == Point.Empty &&
                e.Button == MouseButtons.Right &&
                !isRendering)
@@ -231,7 +226,7 @@ namespace FracMaster
       }
     }
 
-    void pictureBox2_MouseMove(object sender, MouseEventArgs e)
+    void pictureBox1_MouseMove(object sender, MouseEventArgs e)
     {
 
       if (!isDragging && !isZooming && !isRendering)
@@ -268,6 +263,16 @@ namespace FracMaster
 
         ControlPaint.DrawReversibleFrame(r, BackColor, FrameStyle.Dashed);
       }
+    }
+
+    private void pictureBox1_MouseWheel(object sender, MouseEventArgs e)
+    {
+      // Update the drawing based upon the mouse wheel scrolling.
+
+      double numberOfTextLinesToMove = e.Delta * SystemInformation.MouseWheelScrollLines / 720.0;
+      ((Generic2DFractal)frac).SetScaleDelta(Math.Pow(2, numberOfTextLinesToMove));
+      ParametersToDialog();
+      RenderFractal(false);
     }
 
     bool IsMouseOverImage(int X, int Y)
@@ -396,17 +401,17 @@ namespace FracMaster
         if (frac.Parameters.HasValue("XC"))
           numericControlX.Value = Convert.ToDecimal(frac.Parameters.GetValue("XC"));
         else
-          numericNewton.Enabled = false;
+          numericControlX.Enabled = false;
         if (frac.Parameters.HasValue("YC"))
           numericControlY.Value = Convert.ToDecimal(frac.Parameters.GetValue("YC"));
         else
-          numericNewton.Enabled = false;
+          numericControlY.Enabled = false;
         if (frac.Parameters.HasValue("A"))
           numericNewton.Value = Convert.ToDecimal(frac.Parameters.GetValue("A"));
         else
           numericNewton.Enabled = false;
-        numericZoomX.Value = Convert.ToDecimal(frac.Parameters.GetValue("W"));
-        numericZoomY.Value = Convert.ToDecimal(frac.Parameters.GetValue("H"));
+        numericZoomX.Value = Convert.ToDecimal(Math.Log((double)frac.Parameters.GetValue("W"), 2));
+        numericZoomY.Value = Convert.ToDecimal(Math.Log((double)frac.Parameters.GetValue("H"), 2));
         numericSizeX.Value = Convert.ToDecimal(frac.Parameters.GetValue("WIDTH"));
         numericSizeY.Value = Convert.ToDecimal(frac.Parameters.GetValue("HEIGHT"));
         numericIteration.Value = Convert.ToDecimal(frac.Parameters.GetValue("ITERATIONS"));
@@ -457,10 +462,13 @@ namespace FracMaster
     {
       int[] Palette = (int[])frac.Parameters.GetValue("PALETTE");
       EditPaletteDialog dia = new EditPaletteDialog();
+      dia.ColorCount = (int)frac.Parameters.GetValue("COLOR_COUNT");
       dia.Palette = (int[])Palette.Clone();
+     
       if (dia.ShowDialog() == DialogResult.OK)
       {
         frac.Parameters.SetValue("PALETTE", dia.Palette);
+        frac.Parameters.SetValue("COLOR_COUNT", dia.ColorCount);
         RenderFractal(true);
       }
     }
@@ -470,7 +478,7 @@ namespace FracMaster
       NumericUpDown box = (NumericUpDown)sender;
       if (box == null)
         return;
-      var value = Convert.ToInt32(box.Value);
+      var value = Convert.ToDouble(box.Value);
       frac.Parameters.SetValue("X", value);
       RenderFractal(true);
     }
@@ -480,7 +488,7 @@ namespace FracMaster
       NumericUpDown box = (NumericUpDown)sender;
       if (box == null)
         return;
-      var value = Convert.ToInt32(box.Value);
+      var value = Convert.ToDouble(box.Value);
       frac.Parameters.SetValue("Y", value);
       RenderFractal(true);
     }
@@ -490,7 +498,7 @@ namespace FracMaster
       NumericUpDown box = (NumericUpDown)sender;
       if (box == null)
         return;
-      var value = Convert.ToDouble(box.Value);
+      var value = Math.Pow(2, Convert.ToDouble(box.Value));
       frac.Parameters.SetValue("W", value);
       RenderFractal(true);
     }
@@ -500,7 +508,7 @@ namespace FracMaster
       NumericUpDown box = (NumericUpDown)sender;
       if (box == null)
         return;
-      var value = Convert.ToDouble(box.Value);
+      var value = Math.Pow(2, Convert.ToDouble(box.Value));
       frac.Parameters.SetValue("H", value);
       RenderFractal(true);
     }

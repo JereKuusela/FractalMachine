@@ -10,61 +10,45 @@ namespace FracMaster
   {
     public Generic2DFractal()
     {
-      pars.SetValue("X", 0);
-      pars.SetValue("Y", 0);
-      pars.SetValue("XC", 0.0);
-      pars.SetValue("YC", 0.0);
+      pars.SetValue("X", 0.0);
+      pars.SetValue("Y", 0.0);
       pars.SetValue("W", 1.0);
       pars.SetValue("H", 1.0);
-      pars.SetValue("WIDTH", 640);
-      pars.SetValue("HEIGHT", 480);
-      pars.SetValue("VERSION", "1.0.0");
       pars.AddValue("ITERATIONS", 64);
       pars.AddValue("ZOOMABLE", 1);
       pars.AddValue("SCROLLABLE", 1);
       pars.AddValue("NUM_THREADS", Environment.ProcessorCount);
       pars.AddValue("APPLY_BILINEAR_FILTER", 0);
+      pars.AddValue("COLOR_COUNT", 5);
     }
 
     virtual public void SetOrigin(int x, int y)
     {
-      pars.SetValue("X", x - (int)pars.GetValue("WIDTH") / 2);
-      pars.SetValue("Y", -y + (int)pars.GetValue("HEIGHT") / 2);
-    }
-
-    virtual public void SetOriginDelta(int dx, int dy)
-    {
-      dx = -dx + (int)pars.GetValue("WIDTH") / 2;
-      dy = dy - (int)pars.GetValue("HEIGHT") / 2;
-      pars.SetValue("X", dx + (int)pars.GetValue("X"));
-      pars.SetValue("Y", dy + (int)pars.GetValue("Y"));
+      // Remove current transformation.
+      double newX = (x - (int)pars.GetValue("WIDTH") / 2.0) / (double)pars.GetValue("W") + (double)pars.GetValue("X");
+      double newY = (y - (int)pars.GetValue("HEIGHT") / 2.0) / (double)pars.GetValue("H") - (double)pars.GetValue("Y");
+      pars.SetValue("X", newX);
+      pars.SetValue("Y", -newY);
     }
 
     virtual public void SetScale(int width, int height)
     {
       double dw = (int)pars.GetValue("WIDTH") / (double)width;
       double dh = (int)pars.GetValue("HEIGHT") / (double)height;
-      var w = (double)pars.GetValue("W") + 5;
-      var h = (double)pars.GetValue("H") + 5;
-
-      pars.SetValue("W", w * dw - 5);
-      pars.SetValue("H", h * dh - 5);
+      pars.SetValue("W", dw * (double)pars.GetValue("W"));
+      pars.SetValue("H", dh * (double)pars.GetValue("H"));
     }
 
-    virtual public void SetControlParameter(double dx, double dy)
+    virtual public void SetScaleDelta(double delta)
     {
-      double CurWpix = (int)pars.GetValue("WIDTH");
-      double CurHpix = (int)pars.GetValue("HEIGHT");
-      double FracWidth = (double)pars.GetValue("W");
-      double FracHeight = (double)pars.GetValue("H");
-      double FracX = (double)pars.GetValue("XC");
-      double FracY = (double)pars.GetValue("YC");
+      pars.SetValue("W", (double)pars.GetValue("W") * delta);
+      pars.SetValue("H", (double)pars.GetValue("H") * delta);
+    }
 
-      FracX -= dx * FracWidth / CurWpix * 100;
-      FracY -= dy * FracHeight / CurHpix * 100;
-
-      pars.SetValue("XC", FracX);
-      pars.SetValue("YC", FracY);
+    virtual public void SetControlParameter(double x, double y)
+    {
+      pars.SetValue("XC", x - (int)pars.GetValue("WIDTH") / 2);
+      pars.SetValue("YC", -y + (int)pars.GetValue("HEIGHT") / 2);
     }
 
     override protected void RenderFunction(object o)

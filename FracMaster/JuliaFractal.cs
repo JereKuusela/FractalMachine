@@ -8,15 +8,8 @@ namespace FracMaster
     public JuliaFractal()
     {
       pars.SetValue("NAME", "Julia Fractal");
-      pars.SetValue("X", 0);
-      pars.SetValue("Y", 0);
       pars.SetValue("XC", 0.0);
       pars.SetValue("YC", 0.0);
-      pars.SetValue("W", 4.0);
-      pars.SetValue("H", 4.0);
-      pars.SetValue("WIDTH", 640);
-      pars.SetValue("HEIGHT", 480);
-      pars.SetValue("VERSION", "1.0.0");
       pars.SetValue("ITERATIONS", 128);
       pars.SetValue("AUTOMATIC_PREVIEW", 1);
       pars.SetValue("CAN_BE_INTERPOLATED", 1);
@@ -71,18 +64,19 @@ namespace FracMaster
       RenderResult.RenderStatus status_clbk = (RenderResult.RenderStatus)o[3];
       AutoResetEvent completed = (AutoResetEvent)o[4];
 
-      int width = (int)pars.GetValue("WIDTH");
-      int heigth = (int)pars.GetValue("HEIGHT");
+      double width = (int)pars.GetValue("WIDTH");
+      double heigth = (int)pars.GetValue("HEIGHT");
       int iterations = (int)pars.GetValue("ITERATIONS") - 1;
       int[] Palette = (int[])pars.GetValue("PALETTE");
+      int ColorCount = (int)pars.GetValue("COLOR_COUNT");
       int RenderInterpolated = (int)pars.GetValue("RENDER_INTERPOLATED", 0);
 
-      double W = 5.0 - (double)pars.GetValue("W") / 10.0;
-      double H = 5.0 - (double)pars.GetValue("H") / 10.0;
-      double X = (int)pars.GetValue("X");
-      double Y = (int)pars.GetValue("Y");
-      double XC = (double)pars.GetValue("XC") / 100;
-      double YC = (double)pars.GetValue("YC") / 100;
+      double W = (double)pars.GetValue("W");
+      double H = (double)pars.GetValue("H");
+      double X = (double)pars.GetValue("X");
+      double Y = (double)pars.GetValue("Y");
+      double XC = 4.5 * (double)pars.GetValue("XC") / width;
+      double YC = 4.5 * (double)pars.GetValue("YC") / heigth;
       double r1 = 0;
       double i1 = 0;
       double r1pow2 = 0;
@@ -91,15 +85,15 @@ namespace FracMaster
       double rlastpow = 0;
       int iter = 0;
       int idx = 0;
-      double xs = (-X / width - 0.5) * W;
-      double ys = (Y / heigth - 0.5) * H;
-      double xd = W / width;
-      double yd = H / heigth;
+      double xs = (W * X / width - 0.5) / (W * 0.25);
+      double ys = (H * -Y / heigth - 0.5) / (H * 0.25);
+      double xd = 4.0 / width / W;
+      double yd = 4.0 / heigth / H;
       double y1 = ys + yd * offset;
 
       for (int y = offset; y < offset + lines; y++)
       {
-        idx = y * width;
+        idx = (int)(y * width);
         double x1 = xs;
 
         for (int x = 0; x < width; x++)
@@ -127,11 +121,11 @@ namespace FracMaster
           {
             double count_f = iter + (4 - rlastpow) / (rpow - rlastpow) - 1;
             int factor = (int)((1.0 - (iter - count_f)) * 255);
-            dst[idx++] = Utils.InterpolateColors(Palette[(iter - 1) % Palette.Length], Palette[iter % Palette.Length], factor);
+            dst[idx++] = Utils.InterpolateColors(Palette[iter % ColorCount], Palette[(iter + 1) % ColorCount], factor);
           }
           else
           {
-            iter = iter % Palette.Length;
+            iter = iter % ColorCount;
             dst[idx++] = Palette[iter];
           }
 
@@ -141,7 +135,7 @@ namespace FracMaster
         lines_rendered++;
         if (lines_rendered % 40 == 0)
         {
-          status_clbk(100.0f * lines_rendered / heigth);
+          status_clbk(100.0f * lines_rendered / (int)heigth);
         }
       }
       completed.Set();

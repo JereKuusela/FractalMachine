@@ -8,13 +8,6 @@ namespace FracMaster
     public MandelbrotFractal()
     {
       pars.SetValue("NAME", "Mandelbrot Fractal");
-      pars.SetValue("X", 0);
-      pars.SetValue("Y", 0);
-      pars.SetValue("W", 4.0);
-      pars.SetValue("H", 4.0);
-      pars.SetValue("WIDTH", 800);
-      pars.SetValue("HEIGHT", 800);
-      pars.SetValue("VERSION", "1.0.0");
       pars.SetValue("ITERATIONS", 128);
       pars.SetValue("CAN_BE_INTERPOLATED", 1);
       pars.SetValue("RENDER_INTERPOLATED", 0);
@@ -77,8 +70,8 @@ namespace FracMaster
 
       double W = (double)pars.GetValue("W");
       double H = (double)pars.GetValue("H");
-      double X = (int)pars.GetValue("X");
-      double Y = (int)pars.GetValue("Y");
+      double X = (double)pars.GetValue("X");
+      double Y = (double)pars.GetValue("Y");
       double r1 = 0;
       double i1 = 0;
       double r1pow2 = 0;
@@ -87,10 +80,10 @@ namespace FracMaster
       double rlastpow = 0;
       int iter = 0;
       int idx = 0;
-      double xs = (-X / width - 0.5) * W;
-      double ys = (Y / heigth - 0.5) * H;
-      double xd = W / width;
-      double yd = H / heigth;
+      double xs = (W * X / width - 0.5) / (W * 0.25);
+      double ys = (H * -Y / heigth - 0.5) / (H * 0.25);
+      double xd = 4.0 / width / W;
+      double yd = 4.0 / heigth / H;
       double y1 = ys + yd * offset;
 
       for (int y = offset; y < offset + lines; y++)

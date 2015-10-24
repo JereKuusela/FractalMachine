@@ -177,7 +177,11 @@ namespace FracMaster
       // 
       // numericControlY
       // 
-      this.numericControlY.DecimalPlaces = 3;
+      this.numericControlY.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
       this.numericControlY.Location = new System.Drawing.Point(31, 710);
       this.numericControlY.Maximum = new decimal(new int[] {
             1000,
@@ -196,7 +200,11 @@ namespace FracMaster
       // 
       // numericControlX
       // 
-      this.numericControlX.DecimalPlaces = 3;
+      this.numericControlX.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
       this.numericControlX.Location = new System.Drawing.Point(31, 680);
       this.numericControlX.Maximum = new decimal(new int[] {
             1000,
@@ -314,14 +322,19 @@ namespace FracMaster
       // numericZoomY
       // 
       this.numericZoomY.DecimalPlaces = 2;
+      this.numericZoomY.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
       this.numericZoomY.Location = new System.Drawing.Point(31, 397);
       this.numericZoomY.Maximum = new decimal(new int[] {
-            10000,
+            1000,
             0,
             0,
             0});
       this.numericZoomY.Minimum = new decimal(new int[] {
-            10000,
+            1000,
             0,
             0,
             -2147483648});
@@ -333,14 +346,19 @@ namespace FracMaster
       // numericZoomX
       // 
       this.numericZoomX.DecimalPlaces = 2;
+      this.numericZoomX.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
       this.numericZoomX.Location = new System.Drawing.Point(31, 367);
       this.numericZoomX.Maximum = new decimal(new int[] {
-            10000,
+            1000,
             0,
             0,
             0});
       this.numericZoomX.Minimum = new decimal(new int[] {
-            10000,
+            1000,
             0,
             0,
             -2147483648});
@@ -351,6 +369,7 @@ namespace FracMaster
       // 
       // numericCenterY
       // 
+      this.numericCenterY.DecimalPlaces = 2;
       this.numericCenterY.Increment = new decimal(new int[] {
             10,
             0,
@@ -374,6 +393,7 @@ namespace FracMaster
       // 
       // numericCenterX
       // 
+      this.numericCenterX.DecimalPlaces = 2;
       this.numericCenterX.Increment = new decimal(new int[] {
             10,
             0,
@@ -486,9 +506,9 @@ namespace FracMaster
       this.labelZoom.AutoSize = true;
       this.labelZoom.Location = new System.Drawing.Point(3, 339);
       this.labelZoom.Name = "labelZoom";
-      this.labelZoom.Size = new System.Drawing.Size(129, 24);
+      this.labelZoom.Size = new System.Drawing.Size(60, 24);
       this.labelZoom.TabIndex = 10;
-      this.labelZoom.Text = "Skaala (zoom)";
+      this.labelZoom.Text = "Zoom";
       // 
       // labelCenterY
       // 
@@ -560,9 +580,10 @@ namespace FracMaster
       // 
       // pictureBox1
       // 
-      this.pictureBox1.Location = new System.Drawing.Point(0, 1);
+      this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.pictureBox1.Location = new System.Drawing.Point(0, 0);
       this.pictureBox1.Name = "pictureBox1";
-      this.pictureBox1.Size = new System.Drawing.Size(787, 779);
+      this.pictureBox1.Size = new System.Drawing.Size(799, 800);
       this.pictureBox1.TabIndex = 0;
       this.pictureBox1.TabStop = false;
       // 
@@ -627,7 +648,6 @@ namespace FracMaster
       }
     }
     private SplitContainer splitContainer1;
-    private PictureBox pictureBox1;
     private Button buttonRender;
     private Button buttonSaveInfo;
     private Button buttonSaveImage;
@@ -660,5 +680,6 @@ namespace FracMaster
     private Label labelControlY;
     private Label labelControlX;
     private Label labelExtraInfo;
+    private PictureBox pictureBox1;
   }
 }
