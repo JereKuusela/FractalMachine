@@ -50,12 +50,16 @@ namespace FracMaster
 
     virtual public void SetControlParameter(double x, double y)
     {
+      var width = (int)pars.GetValue("WIDTH") / 2;
+      var height = (int)pars.GetValue("HEIGHT") / 2;
+      x = x - width;
+      y = -y + height;
       if (pars.HasValue("XC"))
-        pars.SetValue("XC", x - (int)pars.GetValue("WIDTH") / 2);
+        pars.SetValue("XC", x);
       if (pars.HasValue("YC"))
-        pars.SetValue("YC", -y + (int)pars.GetValue("HEIGHT") / 2);
+        pars.SetValue("YC", y);
       if (pars.HasValue("A"))
-        pars.SetValue("A", Math.Sqrt(x * x + y * y) / 1000);
+        pars.SetValue("A", 20.0 * Math.Sqrt(x * x + y * y) / Math.Sqrt(width * width + height * height));
     }
 
     override protected void RenderFunction(object o)

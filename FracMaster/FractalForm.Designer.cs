@@ -130,17 +130,12 @@ namespace FracMaster
       // numericNewton
       // 
       this.numericNewton.DecimalPlaces = 1;
-      this.numericNewton.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
       this.numericNewton.Location = new System.Drawing.Point(9, 585);
-      this.numericNewton.Minimum = new decimal(new int[] {
-            100,
+      this.numericNewton.Maximum = new decimal(new int[] {
+            20,
             0,
             0,
-            -2147483648});
+            0});
       this.numericNewton.Name = "numericNewton";
       this.numericNewton.Size = new System.Drawing.Size(85, 29);
       this.numericNewton.TabIndex = 39;
