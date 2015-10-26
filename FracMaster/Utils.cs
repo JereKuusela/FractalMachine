@@ -1,4 +1,8 @@
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace FracMaster
 {
@@ -19,6 +23,14 @@ namespace FracMaster
       byte blue = (byte)(c1.B + ((c2.B - c1.B) * weigth >> 8) & 0xff);
 
       return Color.FromArgb(red, green, blue).ToArgb();
+    }
+
+    static public IEnumerable<Control> GetAll(Control control)
+    {
+      var controls = control.Controls.Cast<Control>();
+
+      return controls.SelectMany(ctrl => GetAll(ctrl))
+                                .Concat(controls);
     }
   }
 }

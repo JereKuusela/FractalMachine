@@ -23,6 +23,7 @@ namespace FracMaster
     bool isRendering = false;
     DateTime renderStart = DateTime.MinValue;
     TimeSpan renderTime = new TimeSpan();
+    int pictureHelpCounter = 0;
 
     #endregion
 
@@ -43,6 +44,11 @@ namespace FracMaster
       pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
       pictureBox1.MouseWheel += new MouseEventHandler(pictureBox1_MouseWheel);
       splitContainer1.Panel2.SizeChanged += new System.EventHandler(splitContainer1_Panel2_SizeChanged);
+      foreach (Control control in Utils.GetAll(this))
+      {
+        control.MouseLeave += new EventHandler(element_MouseLeave);
+        control.MouseEnter += new EventHandler(element_MouseHover);
+      }
     }
 
     public void UpdateFractalSize()
@@ -120,45 +126,6 @@ namespace FracMaster
       RenderFractal(false);
 
     }
-    bool ScreenToFractal(double X, double Y, out double XF, out double YF)
-    {
-      if (pictureBox1.Image != null)
-      {
-        int off_x = pictureBox1.Width - pictureBox1.Image.Width;
-        int off_y = pictureBox1.Height - pictureBox1.Image.Height;
-
-        off_x /= 2;
-        off_y /= 2;
-
-        if (X > off_x && X < (off_x + pictureBox1.Image.Width) &&
-            Y > off_y && Y < (off_y + pictureBox1.Image.Height))
-        {
-          X -= off_x;
-          Y -= off_y;
-          IFractalParameters pars = frac.Parameters;
-
-          double FracX = (int)pars.GetValue("X");
-          double FracY = (int)pars.GetValue("Y");
-          double FracWidth = (int)pars.GetValue("WIDTH");
-          double FracHeight = (int)pars.GetValue("HEIGHT");
-          double FracW = (double)pars.GetValue("W");
-          double FracH = (double)pars.GetValue("H");
-          double FracX1 = (-FracX / FracWidth - 0.5) * FracW;
-          double FracY1 = (FracY / FracHeight - 0.5) * FracH;
-
-          // PicW : X = FracWidth : dxf
-          // pictureBox2.Image.Width : X = FracWidth : dxf
-          double dxf = FracW * X / pictureBox1.Image.Width;
-          double dyf = FracH * Y / pictureBox1.Image.Height;
-          XF = FracX1 + dxf;
-          YF = FracY1 + dyf;
-          return true;
-        }
-      }
-      XF = 0;
-      YF = 0;
-      return false;
-    }
 
     void OnImageZoomed(Point p1, Point p2)
     {
@@ -180,21 +147,7 @@ namespace FracMaster
       }
       else if (IsMouseOverImage(e.X, e.Y) && dragStart != Point.Empty && e.Button == MouseButtons.Right)
       {
-        double ar = 1.0;
-
-        if (pictureBox1.Image != null)
-        {
-          ar = pictureBox1.Image.Width / (double)pictureBox1.Image.Height;
-        }
-
-        double drw = e.X - dragStart.X;
-        double drh = e.Y - dragStart.Y;
-
-        if (drw > drh) drh = drw / ar;
-        else drw = drh * ar;
-
-        dragEnd = new Point((int)(dragStart.X + drw), (int)(dragStart.Y + drh));
-        OnImageZoomed(dragStart, dragEnd);
+        OnImageZoomed(dragStart, new Point(e.X, e.Y));
       }
 
       isZooming = false;
@@ -246,18 +199,9 @@ namespace FracMaster
 
         Point endPoint = pictureBox1.PointToScreen(new Point(e.X, e.Y));
         Point startPoint = pictureBox1.PointToScreen(dragStart);
-        double ar = 1.0;
-
-        if (pictureBox1.Image != null)
-        {
-          ar = pictureBox1.Image.Width / (double)pictureBox1.Image.Height;
-        }
 
         double drw = endPoint.X - startPoint.X;
         double drh = endPoint.Y - startPoint.Y;
-
-        if (drw > drh) drh = drw / ar;
-        else drw = drh * ar;
 
         r = new Rectangle(startPoint.X, startPoint.Y, (int)drw, (int)drh);
 
@@ -608,6 +552,56 @@ namespace FracMaster
       var value = Convert.ToDouble(box.Value);
       frac.Parameters.SetValue("A", value);
       RenderFractal(true);
+    }
+
+    private void element_MouseLeave(object sender, EventArgs e)
+    {
+      ((MDIForm)MdiParent).setHelpText("");
+    }
+
+    private void element_MouseHover(object sender, EventArgs e)
+    {
+      var name = "";
+      if (sender is ToolStripItem)
+        name = ((ToolStripItem)sender).Name;
+      else
+        name = ((Control)sender).Name;
+      if (name == labelCenter.Name || name == numericCenterX.Name || name == numericCenterY.Name)
+        ((MDIForm)MdiParent).setHelpText("Asettaa kuvan keskipisteen. Arvojen kasvattaminen siirt‰‰ kuvaa vasemmalle/alas.");
+      else if (name == labelZoom.Name || name == numericZoomX.Name || name == numericZoomY.Name)
+        ((MDIForm)MdiParent).setHelpText("Asettaa kuvan zoomauksen. Arvojen kasvattaminen venytt‰‰ kuvaa.");
+      else if (name == labelSize.Name || name == numericSizeX.Name || name == numericSizeY.Name)
+        ((MDIForm)MdiParent).setHelpText("Asettaa piirtoalueen koon (pikselien m‰‰r‰).");
+      else if (name == labelIteration.Name || name == numericIteration.Name)
+        ((MDIForm)MdiParent).setHelpText("Asettaa algoritmin kierrosten lukum‰‰r‰n. Arvon kasvattaminen lis‰‰ kuvan monimutkaisuutta.");
+      else if (name == numericControlX.Name || name == numericControlY.Name)
+        ((MDIForm)MdiParent).setHelpText("Asettaa Julia-fraktaalin algoritmin aloituspisteen. Vaikuttaa kuvan muotoon.");
+      else if (name == numericNewton.Name)
+        ((MDIForm)MdiParent).setHelpText("Asettaa Newton-fraktaalin algoritmin siirtym‰n. Vaikuttaa kuvan muotoon.");
+      else if (name == buttonPalett.Name)
+        ((MDIForm)MdiParent).setHelpText("Avaa ikkunan, josta voit valita kuvassa k‰ytett‰v‰t v‰rit ja niiden m‰‰r‰n.");
+      else if (name == buttonRender.Name)
+        ((MDIForm)MdiParent).setHelpText("Piirt‰‰ tai keskeytt‰‰ kuvan piirron.");
+      else if (name == buttonSaveImage.Name)
+        ((MDIForm)MdiParent).setHelpText("Tallentaa kuvan kuvatiedostona muita ohjelmia tai tulostusta varten.");
+      else if (name == buttonSaveInfo.Name)
+        ((MDIForm)MdiParent).setHelpText("Tallentaa kuvan asetusarvot, jotta sen voi avata t‰ll‰ ohjelmalla myˆhemmin.");
+      else if (name == checkBoxInterpolation.Name)
+        ((MDIForm)MdiParent).setHelpText("M‰‰ritt‰‰ yhdistet‰‰nkˆ viereisi‰ v‰rej‰ tasaisemman lopputuloksen saamiseksi.");
+      else if (name == checkBoxPreview.Name)
+        ((MDIForm)MdiParent).setHelpText("M‰‰ritt‰‰ piirret‰‰nkˆ kuva automaattisesti asetusten muuttamisen j‰lkeen.");
+      else if (name == checkBoxFilter.Name)
+        ((MDIForm)MdiParent).setHelpText("M‰‰ritt‰‰ pehmennet‰‰nkˆ jyrkki‰ rajoja. Sumentaa kuvaa.");
+      else if (name == pictureBox1.Name)
+      {
+        if (pictureHelpCounter == 0)
+          ((MDIForm)MdiParent).setHelpText("Hiiren vasen nappi siirt‰‰ valitun pisten kuvan keskelle.");
+        else if (pictureHelpCounter == 1)
+          ((MDIForm)MdiParent).setHelpText("Hiiren oikean napin pit‰minen pohjassa zoomaa kuvan valitulle alueelle.");
+        else
+          ((MDIForm)MdiParent).setHelpText("Hiiren keskinappi asettaa lis‰asetuksen Julia- tai Newton-fraktaalille.");
+        pictureHelpCounter = (pictureHelpCounter + 1) % 3;
+      }
     }
   }
 }

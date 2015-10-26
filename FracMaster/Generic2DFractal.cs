@@ -34,6 +34,8 @@ namespace FracMaster
 
     virtual public void SetScale(int width, int height)
     {
+      if (width < 5 || height < 5)
+        return;
       double dw = (int)pars.GetValue("WIDTH") / (double)width;
       double dh = (int)pars.GetValue("HEIGHT") / (double)height;
       pars.SetValue("W", dw * (double)pars.GetValue("W"));
@@ -48,8 +50,12 @@ namespace FracMaster
 
     virtual public void SetControlParameter(double x, double y)
     {
-      pars.SetValue("XC", x - (int)pars.GetValue("WIDTH") / 2);
-      pars.SetValue("YC", -y + (int)pars.GetValue("HEIGHT") / 2);
+      if (pars.HasValue("XC"))
+        pars.SetValue("XC", x - (int)pars.GetValue("WIDTH") / 2);
+      if (pars.HasValue("YC"))
+        pars.SetValue("YC", -y + (int)pars.GetValue("HEIGHT") / 2);
+      if (pars.HasValue("A"))
+        pars.SetValue("A", Math.Sqrt(x * x + y * y) / 1000);
     }
 
     override protected void RenderFunction(object o)

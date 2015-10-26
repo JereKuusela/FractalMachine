@@ -39,11 +39,8 @@ namespace FracMaster
     {
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
       this.numericNewton = new System.Windows.Forms.NumericUpDown();
-      this.labelNewton = new System.Windows.Forms.Label();
       this.numericControlY = new System.Windows.Forms.NumericUpDown();
       this.numericControlX = new System.Windows.Forms.NumericUpDown();
-      this.labelControlY = new System.Windows.Forms.Label();
-      this.labelControlX = new System.Windows.Forms.Label();
       this.labelExtraInfo = new System.Windows.Forms.Label();
       this.checkBoxPreview = new System.Windows.Forms.CheckBox();
       this.numericIteration = new System.Windows.Forms.NumericUpDown();
@@ -57,16 +54,9 @@ namespace FracMaster
       this.checkBoxFilter = new System.Windows.Forms.CheckBox();
       this.checkBoxInterpolation = new System.Windows.Forms.CheckBox();
       this.labelIteration = new System.Windows.Forms.Label();
-      this.labelSizeY = new System.Windows.Forms.Label();
-      this.labelSizeX = new System.Windows.Forms.Label();
       this.labelSize = new System.Windows.Forms.Label();
-      this.labelZoomY = new System.Windows.Forms.Label();
-      this.labelZoomX = new System.Windows.Forms.Label();
       this.labelZoom = new System.Windows.Forms.Label();
-      this.labelCenterY = new System.Windows.Forms.Label();
-      this.labelCenterX = new System.Windows.Forms.Label();
       this.labelCenter = new System.Windows.Forms.Label();
-      this.labelInfo = new System.Windows.Forms.Label();
       this.buttonSaveInfo = new System.Windows.Forms.Button();
       this.buttonSaveImage = new System.Windows.Forms.Button();
       this.buttonRender = new System.Windows.Forms.Button();
@@ -100,11 +90,8 @@ namespace FracMaster
       // 
       this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.ControlDark;
       this.splitContainer1.Panel1.Controls.Add(this.numericNewton);
-      this.splitContainer1.Panel1.Controls.Add(this.labelNewton);
       this.splitContainer1.Panel1.Controls.Add(this.numericControlY);
       this.splitContainer1.Panel1.Controls.Add(this.numericControlX);
-      this.splitContainer1.Panel1.Controls.Add(this.labelControlY);
-      this.splitContainer1.Panel1.Controls.Add(this.labelControlX);
       this.splitContainer1.Panel1.Controls.Add(this.labelExtraInfo);
       this.splitContainer1.Panel1.Controls.Add(this.checkBoxPreview);
       this.splitContainer1.Panel1.Controls.Add(this.numericIteration);
@@ -118,16 +105,9 @@ namespace FracMaster
       this.splitContainer1.Panel1.Controls.Add(this.checkBoxFilter);
       this.splitContainer1.Panel1.Controls.Add(this.checkBoxInterpolation);
       this.splitContainer1.Panel1.Controls.Add(this.labelIteration);
-      this.splitContainer1.Panel1.Controls.Add(this.labelSizeY);
-      this.splitContainer1.Panel1.Controls.Add(this.labelSizeX);
       this.splitContainer1.Panel1.Controls.Add(this.labelSize);
-      this.splitContainer1.Panel1.Controls.Add(this.labelZoomY);
-      this.splitContainer1.Panel1.Controls.Add(this.labelZoomX);
       this.splitContainer1.Panel1.Controls.Add(this.labelZoom);
-      this.splitContainer1.Panel1.Controls.Add(this.labelCenterY);
-      this.splitContainer1.Panel1.Controls.Add(this.labelCenterX);
       this.splitContainer1.Panel1.Controls.Add(this.labelCenter);
-      this.splitContainer1.Panel1.Controls.Add(this.labelInfo);
       this.splitContainer1.Panel1.Controls.Add(this.buttonSaveInfo);
       this.splitContainer1.Panel1.Controls.Add(this.buttonSaveImage);
       this.splitContainer1.Panel1.Controls.Add(this.buttonRender);
@@ -141,7 +121,7 @@ namespace FracMaster
       this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
       this.splitContainer1.Panel2.Controls.Add(this.pictureBox1);
       this.splitContainer1.Panel2MinSize = 20;
-      this.splitContainer1.Size = new System.Drawing.Size(1000, 800);
+      this.splitContainer1.Size = new System.Drawing.Size(1000, 780);
       this.splitContainer1.SplitterDistance = 200;
       this.splitContainer1.SplitterWidth = 1;
       this.splitContainer1.TabIndex = 1;
@@ -155,25 +135,16 @@ namespace FracMaster
             0,
             0,
             65536});
-      this.numericNewton.Location = new System.Drawing.Point(31, 740);
+      this.numericNewton.Location = new System.Drawing.Point(9, 585);
       this.numericNewton.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
       this.numericNewton.Name = "numericNewton";
-      this.numericNewton.Size = new System.Drawing.Size(158, 29);
+      this.numericNewton.Size = new System.Drawing.Size(85, 29);
       this.numericNewton.TabIndex = 39;
       this.numericNewton.ValueChanged += new System.EventHandler(this.numericNewton_ValueChanged);
-      // 
-      // labelNewton
-      // 
-      this.labelNewton.AutoSize = true;
-      this.labelNewton.Location = new System.Drawing.Point(3, 742);
-      this.labelNewton.Name = "labelNewton";
-      this.labelNewton.Size = new System.Drawing.Size(23, 24);
-      this.labelNewton.TabIndex = 38;
-      this.labelNewton.Text = "A";
       // 
       // numericControlY
       // 
@@ -182,7 +153,7 @@ namespace FracMaster
             0,
             0,
             0});
-      this.numericControlY.Location = new System.Drawing.Point(31, 710);
+      this.numericControlY.Location = new System.Drawing.Point(109, 550);
       this.numericControlY.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -194,7 +165,7 @@ namespace FracMaster
             0,
             -2147483648});
       this.numericControlY.Name = "numericControlY";
-      this.numericControlY.Size = new System.Drawing.Size(158, 29);
+      this.numericControlY.Size = new System.Drawing.Size(86, 29);
       this.numericControlY.TabIndex = 37;
       this.numericControlY.ValueChanged += new System.EventHandler(this.numericControlY_ValueChanged);
       // 
@@ -205,7 +176,7 @@ namespace FracMaster
             0,
             0,
             0});
-      this.numericControlX.Location = new System.Drawing.Point(31, 680);
+      this.numericControlX.Location = new System.Drawing.Point(9, 550);
       this.numericControlX.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -217,32 +188,14 @@ namespace FracMaster
             0,
             -2147483648});
       this.numericControlX.Name = "numericControlX";
-      this.numericControlX.Size = new System.Drawing.Size(158, 29);
+      this.numericControlX.Size = new System.Drawing.Size(85, 29);
       this.numericControlX.TabIndex = 36;
       this.numericControlX.ValueChanged += new System.EventHandler(this.numericControlX_ValueChanged);
-      // 
-      // labelControlY
-      // 
-      this.labelControlY.AutoSize = true;
-      this.labelControlY.Location = new System.Drawing.Point(3, 712);
-      this.labelControlY.Name = "labelControlY";
-      this.labelControlY.Size = new System.Drawing.Size(22, 24);
-      this.labelControlY.TabIndex = 35;
-      this.labelControlY.Text = "Y";
-      // 
-      // labelControlX
-      // 
-      this.labelControlX.AutoSize = true;
-      this.labelControlX.Location = new System.Drawing.Point(3, 682);
-      this.labelControlX.Name = "labelControlX";
-      this.labelControlX.Size = new System.Drawing.Size(24, 24);
-      this.labelControlX.TabIndex = 34;
-      this.labelControlX.Text = "X";
       // 
       // labelExtraInfo
       // 
       this.labelExtraInfo.AutoSize = true;
-      this.labelExtraInfo.Location = new System.Drawing.Point(3, 652);
+      this.labelExtraInfo.Location = new System.Drawing.Point(5, 523);
       this.labelExtraInfo.Name = "labelExtraInfo";
       this.labelExtraInfo.Size = new System.Drawing.Size(121, 24);
       this.labelExtraInfo.TabIndex = 33;
@@ -262,7 +215,7 @@ namespace FracMaster
       // 
       // numericIteration
       // 
-      this.numericIteration.Location = new System.Drawing.Point(31, 549);
+      this.numericIteration.Location = new System.Drawing.Point(13, 423);
       this.numericIteration.Maximum = new decimal(new int[] {
             255,
             0,
@@ -274,7 +227,7 @@ namespace FracMaster
             0,
             0});
       this.numericIteration.Name = "numericIteration";
-      this.numericIteration.Size = new System.Drawing.Size(158, 29);
+      this.numericIteration.Size = new System.Drawing.Size(81, 29);
       this.numericIteration.TabIndex = 31;
       this.numericIteration.Value = new decimal(new int[] {
             1,
@@ -290,14 +243,14 @@ namespace FracMaster
             0,
             0,
             0});
-      this.numericSizeY.Location = new System.Drawing.Point(31, 487);
+      this.numericSizeY.Location = new System.Drawing.Point(109, 353);
       this.numericSizeY.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
       this.numericSizeY.Name = "numericSizeY";
-      this.numericSizeY.Size = new System.Drawing.Size(158, 29);
+      this.numericSizeY.Size = new System.Drawing.Size(86, 29);
       this.numericSizeY.TabIndex = 30;
       this.numericSizeY.ValueChanged += new System.EventHandler(this.numericSizeY_ValueChanged);
       // 
@@ -308,14 +261,14 @@ namespace FracMaster
             0,
             0,
             0});
-      this.numericSizeX.Location = new System.Drawing.Point(31, 457);
+      this.numericSizeX.Location = new System.Drawing.Point(12, 353);
       this.numericSizeX.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
       this.numericSizeX.Name = "numericSizeX";
-      this.numericSizeX.Size = new System.Drawing.Size(158, 29);
+      this.numericSizeX.Size = new System.Drawing.Size(82, 29);
       this.numericSizeX.TabIndex = 29;
       this.numericSizeX.ValueChanged += new System.EventHandler(this.numericSizeX_ValueChanged);
       // 
@@ -327,7 +280,7 @@ namespace FracMaster
             0,
             0,
             65536});
-      this.numericZoomY.Location = new System.Drawing.Point(31, 397);
+      this.numericZoomY.Location = new System.Drawing.Point(109, 294);
       this.numericZoomY.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -339,7 +292,7 @@ namespace FracMaster
             0,
             -2147483648});
       this.numericZoomY.Name = "numericZoomY";
-      this.numericZoomY.Size = new System.Drawing.Size(158, 29);
+      this.numericZoomY.Size = new System.Drawing.Size(86, 29);
       this.numericZoomY.TabIndex = 28;
       this.numericZoomY.ValueChanged += new System.EventHandler(this.numericZoomY_ValueChanged);
       // 
@@ -351,7 +304,7 @@ namespace FracMaster
             0,
             0,
             65536});
-      this.numericZoomX.Location = new System.Drawing.Point(31, 367);
+      this.numericZoomX.Location = new System.Drawing.Point(13, 294);
       this.numericZoomX.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -363,7 +316,7 @@ namespace FracMaster
             0,
             -2147483648});
       this.numericZoomX.Name = "numericZoomX";
-      this.numericZoomX.Size = new System.Drawing.Size(158, 29);
+      this.numericZoomX.Size = new System.Drawing.Size(81, 29);
       this.numericZoomX.TabIndex = 27;
       this.numericZoomX.ValueChanged += new System.EventHandler(this.numericZoomX_ValueChanged);
       // 
@@ -375,7 +328,7 @@ namespace FracMaster
             0,
             0,
             0});
-      this.numericCenterY.Location = new System.Drawing.Point(31, 307);
+      this.numericCenterY.Location = new System.Drawing.Point(109, 235);
       this.numericCenterY.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -387,7 +340,7 @@ namespace FracMaster
             0,
             -2147483648});
       this.numericCenterY.Name = "numericCenterY";
-      this.numericCenterY.Size = new System.Drawing.Size(158, 29);
+      this.numericCenterY.Size = new System.Drawing.Size(86, 29);
       this.numericCenterY.TabIndex = 26;
       this.numericCenterY.ValueChanged += new System.EventHandler(this.numericCenterY_ValueChanged);
       // 
@@ -399,7 +352,7 @@ namespace FracMaster
             0,
             0,
             0});
-      this.numericCenterX.Location = new System.Drawing.Point(31, 277);
+      this.numericCenterX.Location = new System.Drawing.Point(9, 235);
       this.numericCenterX.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -411,13 +364,13 @@ namespace FracMaster
             0,
             -2147483648});
       this.numericCenterX.Name = "numericCenterX";
-      this.numericCenterX.Size = new System.Drawing.Size(158, 29);
+      this.numericCenterX.Size = new System.Drawing.Size(85, 29);
       this.numericCenterX.TabIndex = 25;
       this.numericCenterX.ValueChanged += new System.EventHandler(this.numericCenterX_ValueChanged);
       // 
       // buttonPalett
       // 
-      this.buttonPalett.Location = new System.Drawing.Point(3, 214);
+      this.buttonPalett.Location = new System.Drawing.Point(9, 173);
       this.buttonPalett.Name = "buttonPalett";
       this.buttonPalett.Size = new System.Drawing.Size(186, 29);
       this.buttonPalett.TabIndex = 24;
@@ -428,7 +381,7 @@ namespace FracMaster
       // checkBoxFilter
       // 
       this.checkBoxFilter.AutoSize = true;
-      this.checkBoxFilter.Location = new System.Drawing.Point(3, 618);
+      this.checkBoxFilter.Location = new System.Drawing.Point(9, 492);
       this.checkBoxFilter.Name = "checkBoxFilter";
       this.checkBoxFilter.Size = new System.Drawing.Size(196, 28);
       this.checkBoxFilter.TabIndex = 23;
@@ -439,7 +392,7 @@ namespace FracMaster
       // checkBoxInterpolation
       // 
       this.checkBoxInterpolation.AutoSize = true;
-      this.checkBoxInterpolation.Location = new System.Drawing.Point(3, 584);
+      this.checkBoxInterpolation.Location = new System.Drawing.Point(9, 458);
       this.checkBoxInterpolation.Name = "checkBoxInterpolation";
       this.checkBoxInterpolation.Size = new System.Drawing.Size(130, 28);
       this.checkBoxInterpolation.TabIndex = 22;
@@ -450,102 +403,38 @@ namespace FracMaster
       // labelIteration
       // 
       this.labelIteration.AutoSize = true;
-      this.labelIteration.Location = new System.Drawing.Point(3, 519);
+      this.labelIteration.Location = new System.Drawing.Point(12, 396);
       this.labelIteration.Name = "labelIteration";
       this.labelIteration.Size = new System.Drawing.Size(146, 24);
       this.labelIteration.TabIndex = 20;
       this.labelIteration.Text = "Monimutkaisuus";
       // 
-      // labelSizeY
-      // 
-      this.labelSizeY.AutoSize = true;
-      this.labelSizeY.Location = new System.Drawing.Point(3, 489);
-      this.labelSizeY.Name = "labelSizeY";
-      this.labelSizeY.Size = new System.Drawing.Size(22, 24);
-      this.labelSizeY.TabIndex = 17;
-      this.labelSizeY.Text = "Y";
-      // 
-      // labelSizeX
-      // 
-      this.labelSizeX.AutoSize = true;
-      this.labelSizeX.Location = new System.Drawing.Point(3, 459);
-      this.labelSizeX.Name = "labelSizeX";
-      this.labelSizeX.Size = new System.Drawing.Size(24, 24);
-      this.labelSizeX.TabIndex = 16;
-      this.labelSizeX.Text = "X";
-      // 
       // labelSize
       // 
       this.labelSize.AutoSize = true;
-      this.labelSize.Location = new System.Drawing.Point(3, 429);
+      this.labelSize.Location = new System.Drawing.Point(12, 326);
       this.labelSize.Name = "labelSize";
       this.labelSize.Size = new System.Drawing.Size(53, 24);
       this.labelSize.TabIndex = 15;
       this.labelSize.Text = "Koko";
       // 
-      // labelZoomY
-      // 
-      this.labelZoomY.AutoSize = true;
-      this.labelZoomY.Location = new System.Drawing.Point(3, 399);
-      this.labelZoomY.Name = "labelZoomY";
-      this.labelZoomY.Size = new System.Drawing.Size(22, 24);
-      this.labelZoomY.TabIndex = 12;
-      this.labelZoomY.Text = "Y";
-      // 
-      // labelZoomX
-      // 
-      this.labelZoomX.AutoSize = true;
-      this.labelZoomX.Location = new System.Drawing.Point(3, 369);
-      this.labelZoomX.Name = "labelZoomX";
-      this.labelZoomX.Size = new System.Drawing.Size(24, 24);
-      this.labelZoomX.TabIndex = 11;
-      this.labelZoomX.Text = "X";
-      // 
       // labelZoom
       // 
       this.labelZoom.AutoSize = true;
-      this.labelZoom.Location = new System.Drawing.Point(3, 339);
+      this.labelZoom.Location = new System.Drawing.Point(9, 267);
       this.labelZoom.Name = "labelZoom";
       this.labelZoom.Size = new System.Drawing.Size(60, 24);
       this.labelZoom.TabIndex = 10;
       this.labelZoom.Text = "Zoom";
       // 
-      // labelCenterY
-      // 
-      this.labelCenterY.AutoSize = true;
-      this.labelCenterY.Location = new System.Drawing.Point(3, 309);
-      this.labelCenterY.Name = "labelCenterY";
-      this.labelCenterY.Size = new System.Drawing.Size(22, 24);
-      this.labelCenterY.TabIndex = 7;
-      this.labelCenterY.Text = "Y";
-      // 
-      // labelCenterX
-      // 
-      this.labelCenterX.AutoSize = true;
-      this.labelCenterX.Location = new System.Drawing.Point(3, 279);
-      this.labelCenterX.Name = "labelCenterX";
-      this.labelCenterX.Size = new System.Drawing.Size(24, 24);
-      this.labelCenterX.TabIndex = 6;
-      this.labelCenterX.Text = "X";
-      // 
       // labelCenter
       // 
       this.labelCenter.AutoSize = true;
-      this.labelCenter.Location = new System.Drawing.Point(3, 249);
+      this.labelCenter.Location = new System.Drawing.Point(9, 208);
       this.labelCenter.Name = "labelCenter";
       this.labelCenter.Size = new System.Drawing.Size(94, 24);
       this.labelCenter.TabIndex = 5;
       this.labelCenter.Text = "Keskipiste";
-      // 
-      // labelInfo
-      // 
-      this.labelInfo.AutoSize = true;
-      this.labelInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.labelInfo.Location = new System.Drawing.Point(3, 177);
-      this.labelInfo.Name = "labelInfo";
-      this.labelInfo.Size = new System.Drawing.Size(135, 31);
-      this.labelInfo.TabIndex = 4;
-      this.labelInfo.Text = "Asetukset";
       // 
       // buttonSaveInfo
       // 
@@ -583,7 +472,7 @@ namespace FracMaster
       this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.pictureBox1.Location = new System.Drawing.Point(0, 0);
       this.pictureBox1.Name = "pictureBox1";
-      this.pictureBox1.Size = new System.Drawing.Size(799, 800);
+      this.pictureBox1.Size = new System.Drawing.Size(799, 780);
       this.pictureBox1.TabIndex = 0;
       this.pictureBox1.TabStop = false;
       // 
@@ -591,7 +480,7 @@ namespace FracMaster
       // 
       this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
       this.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-      this.ClientSize = new System.Drawing.Size(1000, 800);
+      this.ClientSize = new System.Drawing.Size(1000, 780);
       this.ControlBox = false;
       this.Controls.Add(this.splitContainer1);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -651,15 +540,8 @@ namespace FracMaster
     private Button buttonRender;
     private Button buttonSaveInfo;
     private Button buttonSaveImage;
-    private Label labelCenterY;
-    private Label labelCenterX;
     private Label labelCenter;
-    private Label labelInfo;
-    private Label labelZoomY;
-    private Label labelZoomX;
     private Label labelZoom;
-    private Label labelSizeY;
-    private Label labelSizeX;
     private Label labelSize;
     private Label labelIteration;
     private CheckBox checkBoxInterpolation;
@@ -674,11 +556,8 @@ namespace FracMaster
     private NumericUpDown numericCenterX;
     private CheckBox checkBoxPreview;
     private NumericUpDown numericNewton;
-    private Label labelNewton;
     private NumericUpDown numericControlY;
     private NumericUpDown numericControlX;
-    private Label labelControlY;
-    private Label labelControlX;
     private Label labelExtraInfo;
     private PictureBox pictureBox1;
   }

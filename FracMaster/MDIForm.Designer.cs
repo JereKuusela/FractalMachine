@@ -39,6 +39,7 @@ namespace FracMaster
       this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.aboutFracMasterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.tabControl1 = new System.Windows.Forms.TabControl();
+      this.labelHelp = new System.Windows.Forms.Label();
       this.menuStrip1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -63,27 +64,35 @@ namespace FracMaster
       this.newToolStripMenuItem.Name = "newToolStripMenuItem";
       this.newToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
       this.newToolStripMenuItem.Text = "Uusi";
+      this.newToolStripMenuItem.MouseEnter += new System.EventHandler(this.element_MouseHover);
+      this.newToolStripMenuItem.MouseLeave += new System.EventHandler(this.element_MouseLeave);
       // 
       // mandelbrotFractalToolStripMenuItem
       // 
       this.mandelbrotFractalToolStripMenuItem.Name = "mandelbrotFractalToolStripMenuItem";
-      this.mandelbrotFractalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.mandelbrotFractalToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
       this.mandelbrotFractalToolStripMenuItem.Text = "Mandelbrot";
       this.mandelbrotFractalToolStripMenuItem.Click += new System.EventHandler(this.mandelbrotFractalToolStripMenuItem_Click);
+      this.mandelbrotFractalToolStripMenuItem.MouseEnter += new System.EventHandler(this.element_MouseHover);
+      this.mandelbrotFractalToolStripMenuItem.MouseLeave += new System.EventHandler(this.element_MouseLeave);
       // 
       // juliaFractalToolStripMenuItem
       // 
       this.juliaFractalToolStripMenuItem.Name = "juliaFractalToolStripMenuItem";
-      this.juliaFractalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.juliaFractalToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
       this.juliaFractalToolStripMenuItem.Text = "Julia";
       this.juliaFractalToolStripMenuItem.Click += new System.EventHandler(this.juliaFractalToolStripMenuItem_Click);
+      this.juliaFractalToolStripMenuItem.MouseEnter += new System.EventHandler(this.element_MouseHover);
+      this.juliaFractalToolStripMenuItem.MouseLeave += new System.EventHandler(this.element_MouseLeave);
       // 
       // newtonFractalToolStripMenuItem
       // 
       this.newtonFractalToolStripMenuItem.Name = "newtonFractalToolStripMenuItem";
-      this.newtonFractalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.newtonFractalToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
       this.newtonFractalToolStripMenuItem.Text = "Newton";
       this.newtonFractalToolStripMenuItem.Click += new System.EventHandler(this.newtonFractalToolStripMenuItem_Click);
+      this.newtonFractalToolStripMenuItem.MouseEnter += new System.EventHandler(this.element_MouseHover);
+      this.newtonFractalToolStripMenuItem.MouseLeave += new System.EventHandler(this.element_MouseLeave);
       // 
       // loadToolStripMenuItem
       // 
@@ -91,6 +100,8 @@ namespace FracMaster
       this.loadToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
       this.loadToolStripMenuItem.Text = "Avaa";
       this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadFractalToolStripMenuItem_Click);
+      this.loadToolStripMenuItem.MouseEnter += new System.EventHandler(this.element_MouseHover);
+      this.loadToolStripMenuItem.MouseLeave += new System.EventHandler(this.element_MouseLeave);
       // 
       // aboutToolStripMenuItem
       // 
@@ -98,6 +109,8 @@ namespace FracMaster
       this.aboutToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
       this.aboutToolStripMenuItem.Text = "Tekijät";
       this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutFracMasterToolStripMenuItem_Click);
+      this.aboutToolStripMenuItem.MouseEnter += new System.EventHandler(this.element_MouseHover);
+      this.aboutToolStripMenuItem.MouseLeave += new System.EventHandler(this.element_MouseLeave);
       // 
       // aboutFracMasterToolStripMenuItem
       // 
@@ -116,11 +129,24 @@ namespace FracMaster
       this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
       this.tabControl1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseUp);
       // 
+      // labelHelp
+      // 
+      this.labelHelp.BackColor = System.Drawing.SystemColors.ControlDark;
+      this.labelHelp.Dock = System.Windows.Forms.DockStyle.Bottom;
+      this.labelHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.labelHelp.Location = new System.Drawing.Point(0, 410);
+      this.labelHelp.Name = "labelHelp";
+      this.labelHelp.Size = new System.Drawing.Size(668, 24);
+      this.labelHelp.TabIndex = 6;
+      this.labelHelp.MouseEnter += new System.EventHandler(this.element_MouseHover);
+      this.labelHelp.MouseLeave += new System.EventHandler(this.element_MouseLeave);
+      // 
       // MDIForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(668, 434);
+      this.Controls.Add(this.labelHelp);
       this.Controls.Add(this.tabControl1);
       this.Controls.Add(this.menuStrip1);
       this.IsMdiContainer = true;
@@ -145,6 +171,7 @@ namespace FracMaster
     private System.Windows.Forms.ToolStripMenuItem mandelbrotFractalToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem juliaFractalToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem newtonFractalToolStripMenuItem;
+    private Label labelHelp;
   }
 }
 

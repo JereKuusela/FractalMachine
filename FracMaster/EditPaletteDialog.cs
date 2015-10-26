@@ -63,10 +63,12 @@ namespace FracMaster
             b.Width = colorWidth - 2;
             b.Height = colorWidth - 2;
             b.Location = new Point(x + 1, y + 1);
-            b.BackColor = Color.FromArgb(palette[i]);
             b.FlatStyle = FlatStyle.Flat;
             b.FlatAppearance.BorderSize = 0;
             b.TabIndex = i;
+            b.Visible = (i < ColorCount);
+            b.BackColor = Color.FromArgb(palette[i]);
+
             x += colorWidth;
             if (idx++ >= NumColsX - 1)
             {
@@ -248,6 +250,9 @@ namespace FracMaster
       if (box == null)
         return;
       ColorCount = Convert.ToInt32(box.Value);
+
+      for (var i = 0; i < panel1.Controls.Count; i++)
+        panel1.Controls[i].Visible = (i < ColorCount);
     }
   }
 }

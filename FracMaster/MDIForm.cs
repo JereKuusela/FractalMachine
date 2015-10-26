@@ -48,7 +48,7 @@ namespace FracMaster
 
     private void mandelbrotFractalToolStripMenuItem_Click(object sender, EventArgs e)
     {
-      FractalForm frmchild = createFractalForm("Mandelbrot Fractal");
+      FractalForm frmchild = createFractalForm("Mandelbrot");
       frmchild.Fractal = new MandelbrotFractal();
       frmchild.UpdateFractalSize();
       frmchild.ParametersToDialog();
@@ -56,7 +56,7 @@ namespace FracMaster
 
     private void juliaFractalToolStripMenuItem_Click(object sender, EventArgs e)
     {
-      FractalForm frmchild = createFractalForm("Julia Fractal");
+      FractalForm frmchild = createFractalForm("Julia");
       frmchild.Fractal = new JuliaFractal();
       frmchild.UpdateFractalSize();
       frmchild.ParametersToDialog();
@@ -64,7 +64,7 @@ namespace FracMaster
 
     private void newtonFractalToolStripMenuItem_Click(object sender, EventArgs e)
     {
-      FractalForm frmchild = createFractalForm("Newton Fractal - Iterations Required");
+      FractalForm frmchild = createFractalForm("Newton");
       frmchild.Fractal = new NewtonFractalByIterationsRequired();
       frmchild.UpdateFractalSize();
       frmchild.ParametersToDialog();
@@ -86,31 +86,25 @@ namespace FracMaster
 
           if (type == "FracMaster.MandelbrotFractal")
           {
-            FractalForm frmchild = new FractalForm();
-            frmchild.MdiParent = this;
+            FractalForm frmchild = createFractalForm("Mandelbrot");
             frmchild.Fractal = new MandelbrotFractal();
             frmchild.Fractal.ReadFromXml(s);
-            frmchild.Show();
-            frmchild.Text = "Mandelbrot Fractal";
+            frmchild.ParametersToDialog();
           }
           else if (type == "FracMaster.JuliaFractal")
           {
-            FractalForm frmchild = new FractalForm();
-            frmchild.MdiParent = this;
+            FractalForm frmchild = createFractalForm("Julia");
             frmchild.Fractal = new JuliaFractal();
             frmchild.Fractal.ReadFromXml(s);
-            frmchild.Show();
-            frmchild.Text = "Julia Fractal";
+            frmchild.ParametersToDialog();
           }
           else if (type == "FracMaster.NewtonFractal" ||
                    type == "FracMaster.NewtonFractalByIterationsRequired")
           {
-            FractalForm frmchild = new FractalForm();
-            frmchild.MdiParent = this;
+            FractalForm frmchild = createFractalForm("Newton");
             frmchild.Fractal = new NewtonFractalByIterationsRequired();
             frmchild.Fractal.ReadFromXml(s);
-            frmchild.Show();
-            frmchild.Text = "Newton Fractal - Iterations required";
+            frmchild.ParametersToDialog();
           }
 
           else
@@ -178,6 +172,39 @@ namespace FracMaster
           }
         }
       }
+    }
+
+    public void setHelpText(string text)
+    {
+      labelHelp.Text = text;
+    }
+
+    private void element_MouseLeave(object sender, EventArgs e)
+    {
+      setHelpText("");
+    }
+
+    private void element_MouseHover(object sender, EventArgs e)
+    {
+      var name = "";
+      if (sender is ToolStripItem)
+        name = ((ToolStripItem)sender).Name;
+      else
+        name = ((Control)sender).Name;
+      if (name == newToolStripMenuItem.Name)
+        setHelpText("Luo uuden kuvan.");
+      else if (name == loadToolStripMenuItem.Name)
+        setHelpText("Avaa vanhan kuvan.");
+      else if (name == juliaFractalToolStripMenuItem.Name)
+        setHelpText("Luo uuden Julia-fraktaalin.");
+      else if (name == newtonFractalToolStripMenuItem.Name)
+        setHelpText("Luo uuden Newton-fraktaalin.");
+      else if (name == mandelbrotFractalToolStripMenuItem.Name)
+        setHelpText("Luo uuden Mandelbrot-fraktaalin.");
+      else if (name == labelHelp.Name)
+        setHelpText("N‰ytt‰‰ ohjeita.");
+      else if (name == aboutToolStripMenuItem.Name)
+        setHelpText("N‰ytt‰‰ ohjelman tekij‰t.");
     }
   }
 }
